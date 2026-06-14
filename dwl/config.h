@@ -27,6 +27,7 @@ static const Rule rules[] = {
 	/* app_id                                    title       tags mask     isfloating   monitor */
 	{ "Gimp_EXAMPLE",                            NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
 	{ "firefox_EXAMPLE",                         NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
+	{ "org.pulseaudio.pavucontrol",               NULL,       0,            1,           -1 },
 	{ "waypaper",                                NULL,       0,            1,           -1 },
 	{ "localsend",                               NULL,       0,            1,           -1 },
         { "org.gnome.baobab",                        NULL,       0,            1,           -1 },

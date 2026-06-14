@@ -7,7 +7,7 @@ export QT_QPA_PLATFORMTHEME="qt6ct"
 export QT_QPA_PLATFORM="wayland;xcb"
 
 (
-    sleep 1.5
+    sleep 0.5
 
     wlr-randr --output HDMI-A-1 --mode 1920x1080@100
 
