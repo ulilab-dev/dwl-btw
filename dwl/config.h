@@ -27,10 +27,10 @@ static const Rule rules[] = {
 	/* app_id                                    title       tags mask     isfloating   monitor */
 	{ "Gimp_EXAMPLE",                            NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
 	{ "firefox_EXAMPLE",                         NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
-	{ "org.pulseaudio.pavucontrol",               NULL,       0,            1,           -1 },
+	{ "org.pulseaudio.pavucontrol",              NULL,       0,            1,           -1 },
 	{ "waypaper",                                NULL,       0,            1,           -1 },
 	{ "localsend",                               NULL,       0,            1,           -1 },
-        { "org.gnome.baobab",                        NULL,       0,            1,           -1 },
+    { "org.gnome.baobab",                        NULL,       0,            1,           -1 },
 
     /* default/example rule: can be changed but cannot be eliminated; at least one rule must exist */
 };
@@ -137,22 +137,22 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_Return,      spawn,            {.v = termcmd} },
 	{ MODKEY,                    XKB_KEY_e,           spawn,            {.v = file} },
 	{ MODKEY,                    XKB_KEY_w,           spawn,            {.v = waypaper} },
+	{ MODKEY,                    XKB_KEY_period,      spawn,            {.v = emoji} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,           spawn,       SHCMD("~/.config/waybar/toggle_waybar.sh") },
 	{ MODKEY,                    XKB_KEY_v,           spawn,       SHCMD("~/.config/rofi/clipboard.sh") },
-	{ MODKEY,                    XKB_KEY_period,      spawn,            {.v = emoji} },
 	{ MODKEY,                    XKB_KEY_j,           focusstack,       {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,           focusstack,       {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,           incnmaster,       {.i = +1} },
 	{ MODKEY,                    XKB_KEY_p,           incnmaster,       {.i = -1} },
 	{ MODKEY,                    XKB_KEY_h,           setmfact,         {.f = -0.05f} },
 	{ MODKEY,                    XKB_KEY_l,           setmfact,         {.f = +0.05f} },
-	{ MODKEY,                    XKB_KEY_z,           zoom,             {0} },
+/*	{ MODKEY,                    XKB_KEY_z,           zoom,             {0} }, */
 	{ MODKEY,                    XKB_KEY_Tab,         view,             {0} },
 	{ MODKEY,                    XKB_KEY_q,           killclient,       {0} },
-	{ MODKEY,                    XKB_KEY_t,           setlayout,        {.v = &layouts[0]} },
-	{ MODKEY,                    XKB_KEY_n,           setlayout,        {.v = &layouts[1]} },
-	{ MODKEY,                    XKB_KEY_m,           setlayout,        {.v = &layouts[2]} },
-	{ MODKEY,                    XKB_KEY_space,       setlayout,        {0} },
+/*	{ MODKEY,                    XKB_KEY_t,           setlayout,        {.v = &layouts[0]} }, */
+/*	{ MODKEY,                    XKB_KEY_n,           setlayout,        {.v = &layouts[1]} }, */
+/*	{ MODKEY,                    XKB_KEY_m,           setlayout,        {.v = &layouts[2]} }, */
+/*	{ MODKEY,                    XKB_KEY_space,       setlayout,        {0} }, */
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_f,           togglefloating,   {0} },
 	{ MODKEY,                    XKB_KEY_f,           togglefullscreen, {0} },
 	{ MODKEY,                    XKB_KEY_0,           view,             {.ui = ~0} },
