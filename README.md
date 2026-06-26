@@ -1,2 +1,2 @@
 # DWL
-copy ohmydwl()[ohmydwl] to `/bin`
+copy ohmydwl[ohmydwl] to `/bin`
