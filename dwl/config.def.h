@@ -8,12 +8,12 @@ static const int sloppyfocus               = 1;  /* focus follows mouse */
 static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
 static const int smartgaps                 = 0;  /* 1 means no outer gap when there is only one window */
 static int gaps                            = 1;  /* 1 means gaps between windows are added */
-static const unsigned int gappx            = 10; /* gap pixel between windows */
-static const unsigned int borderpx         = 1;  /* border pixel of windows */
-static const float rootcolor[]             = COLOR(0x222222ff);
-static const float bordercolor[]           = COLOR(0x595959aa);
-static const float focuscolor[]            = COLOR(0xaaaaadad);
-static const float urgentcolor[]           = COLOR(0xff0000ff);
+static const unsigned int gappx            = 10;  /* gap pixel between windows */
+static const unsigned int borderpx         = 10;  /* border pixel of windows */
+static const float rootcolor[]             = COLOR(0x222222ff00);
+static const float bordercolor[]           = COLOR(0x595959aa00);
+static const float focuscolor[]            = COLOR(0xaaaaadad00);
+static const float urgentcolor[]           = COLOR(0xff0000ff00);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
 static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 1.0f}; /* You can also use glsl colors */
 
@@ -122,7 +122,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[] = { "foot", NULL };
+static const char *termcmd[] = { "kitty", NULL };
 static const char *menucmd[] = { "rofi","-show","drun", NULL };
 static const char *file[] = {"dolphin", NULL};
 static const char *waypaper[] = {"waypaper", NULL};
@@ -136,6 +136,7 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_e,           spawn,            {.v = file} },
 	{ MODKEY,                    XKB_KEY_w,           spawn,            {.v = waypaper} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,           spawn,            {.v = toggle_waybar} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_p,           spawn,       SHCMD("hyprshot -m region -o ~/Pictures/Screenshots") },
 	{ MODKEY,                    XKB_KEY_j,           focusstack,       {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,           focusstack,       {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,           incnmaster,       {.i = +1} },

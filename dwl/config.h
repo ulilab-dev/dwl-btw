@@ -8,12 +8,12 @@ static const int sloppyfocus               = 1;  /* focus follows mouse */
 static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
 static const int smartgaps                 = 0;  /* 1 means no outer gap when there is only one window */
 static int gaps                            = 1;  /* 1 means gaps between windows are added */
-static const unsigned int gappx            = 2;  /* gap pixel between windows */
-static const unsigned int borderpx         = 2;  /* border pixel of windows */
-static const float rootcolor[]             = COLOR(0x222222ff);
-static const float bordercolor[]           = COLOR(0x595959aa);
-static const float focuscolor[]            = COLOR(0xaaaaadad);
-static const float urgentcolor[]           = COLOR(0xff0000ff);
+static const unsigned int gappx            = 10;  /* gap pixel between windows */
+static const unsigned int borderpx         = 10;  /* border pixel of windows */
+static const float rootcolor[]             = COLOR(0x222222ff00);
+static const float bordercolor[]           = COLOR(0x595959aa00);
+static const float focuscolor[]            = COLOR(0xaaaaadad00);
+static const float urgentcolor[]           = COLOR(0xff0000ff00);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
 static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 1.0f}; /* You can also use glsl colors */
 
@@ -27,10 +27,9 @@ static const Rule rules[] = {
 	/* app_id                                    title       tags mask     isfloating   monitor */
 	{ "Gimp_EXAMPLE",                            NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
 	{ "firefox_EXAMPLE",                         NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
-	{ "org.pulseaudio.pavucontrol",              NULL,       0,            1,           -1 },
 	{ "waypaper",                                NULL,       0,            1,           -1 },
 	{ "localsend",                               NULL,       0,            1,           -1 },
-    { "org.gnome.baobab",                        NULL,       0,            1,           -1 },
+        { "org.gnome.baobab",                        NULL,       0,            1,           -1 },
 
     /* default/example rule: can be changed but cannot be eliminated; at least one rule must exist */
 };
@@ -123,12 +122,11 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[] = { "foot", NULL };
+static const char *termcmd[] = { "kitty", NULL };
 static const char *menucmd[] = { "rofi","-show","drun", NULL };
 static const char *file[] = {"dolphin", NULL};
 static const char *waypaper[] = {"waypaper", NULL};
-static const char *emoji[] = { "rofi","-show", "emoji", "-config", "~/.config/rofi/themes/clip.rasi", NULL };
-
+static const char *toggle_waybar[] = {"~/.config/waybar/toggle_waybar.sh", NULL};
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: 2 -> at, etc. */
@@ -137,28 +135,27 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_Return,      spawn,            {.v = termcmd} },
 	{ MODKEY,                    XKB_KEY_e,           spawn,            {.v = file} },
 	{ MODKEY,                    XKB_KEY_w,           spawn,            {.v = waypaper} },
-	{ MODKEY,                    XKB_KEY_period,      spawn,            {.v = emoji} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,           spawn,       SHCMD("~/.config/waybar/toggle_waybar.sh") },
-	{ MODKEY,                    XKB_KEY_v,           spawn,       SHCMD("~/.config/rofi/clipboard.sh") },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,           spawn,            {.v = toggle_waybar} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_p,           spawn,       SHCMD("hyprshot -m region -o ~/Pictures/Screenshots") },
 	{ MODKEY,                    XKB_KEY_j,           focusstack,       {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,           focusstack,       {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,           incnmaster,       {.i = +1} },
 	{ MODKEY,                    XKB_KEY_p,           incnmaster,       {.i = -1} },
 	{ MODKEY,                    XKB_KEY_h,           setmfact,         {.f = -0.05f} },
 	{ MODKEY,                    XKB_KEY_l,           setmfact,         {.f = +0.05f} },
-/*	{ MODKEY,                    XKB_KEY_z,           zoom,             {0} }, */
+	{ MODKEY,                    XKB_KEY_Return,      zoom,             {0} },
 	{ MODKEY,                    XKB_KEY_Tab,         view,             {0} },
 	{ MODKEY,                    XKB_KEY_q,           killclient,       {0} },
-/*	{ MODKEY,                    XKB_KEY_t,           setlayout,        {.v = &layouts[0]} }, */
-/*	{ MODKEY,                    XKB_KEY_n,           setlayout,        {.v = &layouts[1]} }, */
-/*	{ MODKEY,                    XKB_KEY_m,           setlayout,        {.v = &layouts[2]} }, */
-/*	{ MODKEY,                    XKB_KEY_space,       setlayout,        {0} }, */
+	{ MODKEY,                    XKB_KEY_t,           setlayout,        {.v = &layouts[0]} },
+	{ MODKEY,                    XKB_KEY_n,           setlayout,        {.v = &layouts[1]} },
+	{ MODKEY,                    XKB_KEY_m,           setlayout,        {.v = &layouts[2]} },
+	{ MODKEY,                    XKB_KEY_space,       setlayout,        {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_f,           togglefloating,   {0} },
 	{ MODKEY,                    XKB_KEY_f,           togglefullscreen, {0} },
 	{ MODKEY,                    XKB_KEY_0,           view,             {.ui = ~0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright,  tag,              {.ui = ~0} },
 	{ MODKEY,                    XKB_KEY_comma,       focusmon,         {.i = WLR_DIRECTION_LEFT} },
-/*	{ MODKEY,                    XKB_KEY_period,      focusmon,         {.i = WLR_DIRECTION_RIGHT} }, */
+	{ MODKEY,                    XKB_KEY_period,      focusmon,         {.i = WLR_DIRECTION_RIGHT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_less,        tagmon,           {.i = WLR_DIRECTION_LEFT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,     tagmon,           {.i = WLR_DIRECTION_RIGHT} },
 	TAGKEYS(          XKB_KEY_1, XKB_KEY_exclam,                        0),
