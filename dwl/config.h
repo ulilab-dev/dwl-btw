@@ -127,6 +127,7 @@ static const char *menucmd[] = { "rofi","-show","drun", NULL };
 static const char *file[] = {"dolphin", NULL};
 static const char *waypaper[] = {"waypaper", NULL};
 static const char *toggle_waybar[] = {"~/.config/waybar/toggle_waybar.sh", NULL};
+static const char *emoji[] = {"rofi","-show","emoji","-config","~/.config/rofi/emoji.rasi", NULL};
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: 2 -> at, etc. */
@@ -136,6 +137,8 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_e,           spawn,            {.v = file} },
 	{ MODKEY,                    XKB_KEY_w,           spawn,            {.v = waypaper} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,           spawn,            {.v = toggle_waybar} },
+	{ MODKEY,                    XKB_KEY_v,           spawn,       SHCMD("~/.config/rofi/clipboard.sh") },
+	{ MODKEY,                    XKB_KEY_period,      spawn,            {.v = emoji} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_p,           spawn,       SHCMD("hyprshot -m region -o ~/Pictures/Screenshots") },
 	{ MODKEY,                    XKB_KEY_j,           focusstack,       {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,           focusstack,       {.i = -1} },
@@ -155,7 +158,7 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_0,           view,             {.ui = ~0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright,  tag,              {.ui = ~0} },
 	{ MODKEY,                    XKB_KEY_comma,       focusmon,         {.i = WLR_DIRECTION_LEFT} },
-	{ MODKEY,                    XKB_KEY_period,      focusmon,         {.i = WLR_DIRECTION_RIGHT} },
+/*	{ MODKEY,                    XKB_KEY_period,      focusmon,         {.i = WLR_DIRECTION_RIGHT} }, */
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_less,        tagmon,           {.i = WLR_DIRECTION_LEFT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,     tagmon,           {.i = WLR_DIRECTION_RIGHT} },
 	TAGKEYS(          XKB_KEY_1, XKB_KEY_exclam,                        0),
