@@ -354,6 +354,7 @@ static void startdrag(struct wl_listener *listener, void *data);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *m);
+static void dwindle(Monitor *m);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglefullscreen(const Arg *arg);
@@ -2417,9 +2418,34 @@ resize(Client *c, struct wlr_box geo, int interact)
 
 	/* this is a no-op if size hasn't changed */
 	c->resize = client_set_size(c, c->geom.width - 2 * c->bw,
-			c->geom.height - 2 * c->bw);
+	c->geom.height - 2 * c->bw);
 	client_get_clip(c, &clip);
 	wlr_scene_subsurface_tree_set_clip(&c->scene_surface->node, &clip);
+}
+
+void
+setmon(Client *c, Monitor *m, uint32_t newtags)
+{
+	Monitor *oldmon = c->mon;
+
+	if (oldmon == m)
+		return;
+	c->mon = m;
+	c->prev = c->geom;
+
+	/* Scene graph sends surface leave/enter events on move and resize */
+	if (oldmon)
+		arrange(oldmon);
+	if (m) {
+		/* Make sure window actually overlaps with the monitor */
+		resize(c, c->geom, 0);
+		c->tags = newtags ? newtags : m->tagset[m->seltags]; /* assign tags of target monitor */
+		c->prev.x = (m->w.width - c->prev.width) / 2 + m->m.x;
+		c->prev.y = (m->w.height - c->prev.height) / 2 + m->m.y;
+		setfullscreen(c, c->isfullscreen); /* This will call arrange(c->mon) */
+		setfloating(c, c->isfloating);
+	}
+	focusclient(focustop(selmon), 1);
 }
 
 void
@@ -2582,29 +2608,6 @@ setmfact(const Arg *arg)
 		return;
 	selmon->mfact = f;
 	arrange(selmon);
-}
-
-void
-setmon(Client *c, Monitor *m, uint32_t newtags)
-{
-	Monitor *oldmon = c->mon;
-
-	if (oldmon == m)
-		return;
-	c->mon = m;
-	c->prev = c->geom;
-
-	/* Scene graph sends surface leave/enter events on move and resize */
-	if (oldmon)
-		arrange(oldmon);
-	if (m) {
-		/* Make sure window actually overlaps with the monitor */
-		resize(c, c->geom, 0);
-		c->tags = newtags ? newtags : m->tagset[m->seltags]; /* assign tags of target monitor */
-		setfullscreen(c, c->isfullscreen); /* This will call arrange(c->mon) */
-		setfloating(c, c->isfloating);
-	}
-	focusclient(focustop(selmon), 1);
 }
 
 void
@@ -2929,6 +2932,58 @@ tile(Monitor *m)
 				.width = m->w.width - mw, .height = (m->w.height - ty) / (n - i)}, 0);
 			ty += c->geom.height;
 		}
+		i++;
+	}
+}
+
+void
+dwindle(Monitor *m)
+{
+	unsigned int i, n = 0;
+	int nx, ny, nw, nh;
+	int horizontal;
+	Client *c;
+
+	/* count clients */
+	wl_list_for_each(c, &clients, link)
+		if (VISIBLEON(c, m) && !c->isfloating && !c->isfullscreen)
+			n++;
+
+	if (n == 0)
+		return;
+
+	nx = m->w.x;
+	ny = m->w.y;
+	nw = m->w.width;
+	nh = m->w.height;
+
+	horizontal = 1; // toggle split direction
+	i = 0;
+
+	wl_list_for_each(c, &clients, link) {
+		if (!VISIBLEON(c, m) || c->isfloating || c->isfullscreen)
+			continue;
+
+		if (i == n - 1) {
+			/* last window gets remaining space */
+			resize(c, (struct wlr_box){nx, ny, nw, nh}, 0);
+		} else if (horizontal) {
+			int w = nw / 2;
+
+			resize(c, (struct wlr_box){nx, ny, w, nh}, 0);
+
+			nx += w;
+			nw -= w;
+		} else {
+			int h = nh / 2;
+
+			resize(c, (struct wlr_box){nx, ny, nw, h}, 0);
+
+			ny += h;
+			nh -= h;
+		}
+
+		horizontal = !horizontal;
 		i++;
 	}
 }

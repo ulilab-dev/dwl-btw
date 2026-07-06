@@ -22,17 +22,23 @@ static int log_level = WLR_ERROR;
 
 static const Rule rules[] = {
 	/* app_id             title       tags mask     isfloating   monitor */
-	{ "Gimp_EXAMPLE",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
-	{ "firefox_EXAMPLE",  NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
+	{ "Gimp_EXAMPLE",                   NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
+	{ "firefox_EXAMPLE",                NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
+    { "org.pulseaudio.pavucontrol",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
+	{ "org.gnome.baobab",               NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
+	{ "localsend",                      NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
+	{ "waypaper",                       NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
+
     /* default/example rule: can be changed but cannot be eliminated; at least one rule must exist */
 };
 
 /* layout(s) */
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },
+	{ "[]=",      dwindle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "[\\]",     tile },
 };
 
 /* monitors */
