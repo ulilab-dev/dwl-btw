@@ -1,10 +1,37 @@
+configuration{
+    modi: ["drun", "window", "run"];
+    show-icons: true;
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    sidebar-mode: false;
+    display-drun: " ";
+    display-run: " ";
+    display-window: " ";
+    
+    //adding vim keybindings
+    kb-row-up: "Up,Control+k";
+    kb-row-left: "Left,Control+h";
+    kb-row-right: "Right,Control+l";
+    kb-row-down: "Down,Control+j";
+
+    kb-accept-entry: "Control+z,Control+y,Return,KP_Enter";
+
+    //fixing up
+    kb-remove-to-eol: "";
+    kb-move-char-back: "Control+b";
+    kb-remove-char-back: "BackSpace";
+    kb-move-char-forward: "Control+f";
+    kb-mode-complete: "Control+o";
+}
+
 /*
  * Dark Theme colorscheme for rofi
  */
 
 // define colors etc.
 * {
-    bg: rgba(20, 24, 30, 0.90);
+    bg: rgba(20, 24, 30, 1);
     hv: #aaadad;
     primary: #2d2d2d;
     ug: #1a1a1a;
@@ -13,7 +40,7 @@
     kl: #aaadad;
     black: #000000;
 
-    font: "JetBrainsMono Nerd Font Bold 11";
+    font: "JetBrainsMono Nerd Font Bold 12";
     background-color: @bg;
     transparent: rgba(0, 0, 0, 0);
 }
@@ -67,8 +94,8 @@ prompt {
 listview {
     layout: vertical;
     padding: 8px;
-    lines: 7;
-    columns: 2;
+    lines: 12;
+    columns: 4;
     border: 0px 3px 3px 3px;
     border-radius: 0px 0px 6px 6px;
     border-color: @primary;
@@ -103,7 +130,7 @@ element normal active {
 element-icon {
     background-color: inherit;
     text-color: inherit;
-    size: 2.5em;
+    size: 0em;
 }
 
 element normal urgent {
