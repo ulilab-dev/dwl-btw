@@ -10,4 +10,4 @@ dunst &
 
 # clipboard
 wl-paste --type text --watch cliphist store &
-wl-clip-persist --clipboard regular &
+wl-clip-persist --clipboard regular --reconnect-tries 0 &
