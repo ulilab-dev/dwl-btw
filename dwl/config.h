@@ -126,7 +126,6 @@ static const char *termcmd[] = { "kitty", NULL };
 static const char *menucmd[] = { "rofi","-show","drun", NULL };
 static const char *file[] = {"dolphin", NULL};
 static const char *waypaper[] = {"waypaper", NULL};
-static const char *toggle_waybar[] = {"~/.config/waybar/toggle_waybar.sh", NULL};
 static const char *emoji[] = {"rofi","-show","emoji","-config","~/.config/rofi/emoji.rasi", NULL};
 
 static const Key keys[] = {
@@ -136,8 +135,9 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_Return,      spawn,            {.v = termcmd} },
 	{ MODKEY,                    XKB_KEY_e,           spawn,            {.v = file} },
 	{ MODKEY,                    XKB_KEY_w,           spawn,            {.v = waypaper} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,           spawn,            {.v = toggle_waybar} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,           spawn,       SHCMD("~/.config/waybar/toggle_waybar.sh") },
 	{ MODKEY,                    XKB_KEY_v,           spawn,       SHCMD("~/.config/rofi/clipboard.sh") },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_t,           spawn,       SHCMD("~/.config/waybar/switch.sh") },
 	{ MODKEY,                    XKB_KEY_period,      spawn,            {.v = emoji} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_p,           spawn,       SHCMD("hyprshot -m region -o ~/Pictures/Screenshots") },
 	{ MODKEY,                    XKB_KEY_j,           focusstack,       {.i = +1} },
