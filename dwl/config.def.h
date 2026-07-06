@@ -22,8 +22,9 @@ static int log_level = WLR_ERROR;
  
 /* Autostart */
 static const char *const autostart[] = {
+        "wlr-randr","--output","HDMI-A-1","--mode","1920x1080@100", NULL,
         "waybar",  NULL,
-        "waypaper", "--restore", NULL,
+        "waypaper","--restore", NULL,
         NULL /* terminate */
 };
 
