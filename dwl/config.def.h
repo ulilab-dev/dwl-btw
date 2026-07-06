@@ -19,6 +19,13 @@ static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 1.0f}; /* You ca
 
 /* logging */
 static int log_level = WLR_ERROR;
+ 
+/* Autostart */
+static const char *const autostart[] = {
+        "waybar",  NULL,
+        "waypaper", "--restore", NULL,
+        NULL /* terminate */
+};
 
 static const Rule rules[] = {
 	/* app_id             title       tags mask     isfloating   monitor */
