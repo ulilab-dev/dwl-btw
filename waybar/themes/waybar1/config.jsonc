@@ -14,8 +14,8 @@
 
     "modules-left": [
 	"custom/logo",    
-        "mpris",
-	"dwl/tags"
+	"dwl/tags",
+    "mpris"
     ],
 
     "modules-center": [
