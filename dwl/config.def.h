@@ -27,16 +27,8 @@ static int log_level = WLR_ERROR;
  
 /* Autostart */
 static const char *const autostart[] = {
-        "wlr-randr","--output","HDMI-A-1","--mode","1920x1080@100", NULL,
-        "waybar",  NULL,
-        "waypaper","--restore", NULL,
-        "dunst", NULL,
-        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
-        
-        /* clipboard */
-        "wl-paste","--type","text","--watch","cliphist","store", NULL,
-        "wl-clip-persist","--clipboard","regular","--reconnect-tries", NULL,
-        NULL /* terminate */
+   "sh", "-c", "~/.config/dwl/autostart.sh", NULL,	   
+   NULL /* terminate */
 };
 
 static const Rule rules[] = {
