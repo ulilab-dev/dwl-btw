@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export XDG_CURRENT_DESKTOP=wlroots
+export XDG_CURRENT_DESKTOP=dwl
 export XDG_SESSION_TYPE="wayland"
 export MOZ_ENABLE_WAYLAND=1
 export XDG_MENU_PREFIX="arch-"
