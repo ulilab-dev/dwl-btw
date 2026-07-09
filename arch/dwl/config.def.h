@@ -150,27 +150,43 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_t,           spawn,       SHCMD("~/.config/waybar/switch.sh") },
 	{ MODKEY,                    XKB_KEY_period,      spawn,            {.v = emoji} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_p,           spawn,       SHCMD("hyprshot -m region -o ~/Pictures/Screenshots") },
-	{ MODKEY,                    XKB_KEY_j,           focusstack,       {.i = +1} },
+
+/*	{ MODKEY,                    XKB_KEY_j,           focusstack,       {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,           focusstack,       {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,           incnmaster,       {.i = +1} },
 	{ MODKEY,                    XKB_KEY_d,           incnmaster,       {.i = -1} },
 	{ MODKEY,                    XKB_KEY_h,           setmfact,         {.f = -0.05f} },
 	{ MODKEY,                    XKB_KEY_l,           setmfact,         {.f = +0.05f} },
-/*	{ MODKEY,                    XKB_KEY_Return,      zoom,             {0} }, */
-	{ MODKEY,                    XKB_KEY_Tab,         view,             {0} },
-	{ MODKEY,                    XKB_KEY_q,           killclient,       {0} },
+	{ MODKEY,                    XKB_KEY_Return,      zoom,             {0} }, */
+
+   { MODKEY,                     XKB_KEY_Left,        focusdir,          {.ui = 0} },
+   { MODKEY,                     XKB_KEY_Right,       focusdir,          {.ui = 1} },
+   { MODKEY,                     XKB_KEY_Up,          focusdir,          {.ui = 2} },
+   { MODKEY,                     XKB_KEY_Down,        focusdir,          {.ui = 3} },
+   
+   { MODKEY|WLR_MODIFIER_SHIFT,  XKB_KEY_Left,        swapdir,           {.ui = 0} },
+   { MODKEY|WLR_MODIFIER_SHIFT,  XKB_KEY_Right,       swapdir,           {.ui = 1} },
+   { MODKEY|WLR_MODIFIER_SHIFT,  XKB_KEY_Up,          swapdir,           {.ui = 2} },
+   { MODKEY|WLR_MODIFIER_SHIFT,  XKB_KEY_Down,        swapdir,           {.ui = 3} },
+
+    { MODKEY,                    XKB_KEY_Tab,         view,             {0} },
+    { MODKEY,                    XKB_KEY_q,           killclient,       {0} },
+
 /*	{ MODKEY,                    XKB_KEY_t,           setlayout,        {.v = &layouts[0]} },
 	{ MODKEY,                    XKB_KEY_f,           setlayout,        {.v = &layouts[1]} },
 	{ MODKEY,                    XKB_KEY_m,           setlayout,        {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_space,       setlayout,        {0} }, */
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_f,           togglefloating,   {0} },
-	{ MODKEY,                    XKB_KEY_e,           togglefullscreen, {0} },
-	{ MODKEY,                    XKB_KEY_0,           view,             {.ui = ~0} },
+
+    { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_f,           togglefloating,   {0} },
+    { MODKEY,                    XKB_KEY_e,           togglefullscreen, {0} },
+
+/*	{ MODKEY,                    XKB_KEY_0,           view,             {.ui = ~0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright,  tag,              {.ui = ~0} },
 	{ MODKEY,                    XKB_KEY_comma,       focusmon,         {.i = WLR_DIRECTION_LEFT} },
-/*	{ MODKEY,                    XKB_KEY_period,      focusmon,         {.i = WLR_DIRECTION_RIGHT} }, */
+	{ MODKEY,                    XKB_KEY_period,      focusmon,         {.i = WLR_DIRECTION_RIGHT} }, 
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_less,        tagmon,           {.i = WLR_DIRECTION_LEFT} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,     tagmon,           {.i = WLR_DIRECTION_RIGHT} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,     tagmon,           {.i = WLR_DIRECTION_RIGHT} }, */
+	
 	TAGKEYS(          XKB_KEY_1, XKB_KEY_exclam,                        0),
 	TAGKEYS(          XKB_KEY_2, XKB_KEY_at,                            1),
 	TAGKEYS(          XKB_KEY_3, XKB_KEY_numbersign,                    2),
