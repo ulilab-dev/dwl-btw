@@ -1,6 +1,7 @@
 # DWL
 
 this dwl config already includes 
+
 [bar](https://codeberg.org/dwl/dwl-patches/src/branch/main/patches/bar/bar.patch),
 [vanitygaps](https://codeberg.org/dwl/dwl-patches/src/branch/main/patches/vanitygaps/vanitygaps-0.8.patch),
 [autostart](https://codeberg.org/dwl/dwl-patches/src/branch/main/patches/autostart/autostart-0.8.patch),
