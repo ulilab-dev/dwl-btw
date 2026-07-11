@@ -5,9 +5,9 @@
     "exclusive": true,
     "passthrough": false,
     "height": 0,
-    "margin-top": 5,
-    "margin-left": 400,
-    "margin-right": 400,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
     "margin-bottom": 0,
     "spacing": 0,
 
@@ -22,7 +22,7 @@
    ],
 
     "modules-right": [
-        "pulseaudio",
+        "group/volume",
         "custom/separator",
         "network",
         "power-profiles-daemon",
@@ -80,6 +80,20 @@
         "scroll-step": 1,
         "ignored-sinks": ["Easy Effects Sink"],
         "on-click": "pavucontrol"
+    },
+
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+
+    "group/volume": {
+      "orientation": "horizontal",
+      "modules": [
+        "pulseaudio",
+        "pulseaudio/slider"
+      ]
     },
 
     "clock": {
