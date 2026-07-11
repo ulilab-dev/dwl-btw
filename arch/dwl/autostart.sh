@@ -2,7 +2,6 @@
 
 wlr-randr --output HDMI-A-1 --mode 1920x1080@100 >/dev/null 2>&1 &
 
-waybar >/dev/null 2>&1 &
 waypaper --restore >/dev/null 2>&1 &
 dunst >/dev/null 2>&1 &
 
