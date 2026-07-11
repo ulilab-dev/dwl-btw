@@ -7,7 +7,7 @@
 static const int sloppyfocus               = 1;  /* focus follows mouse */
 static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
 static const int smartgaps                 = 0;  /* 1 means no outer gap when there is only one window */
-static const unsigned int borderpx         = 1;  /* border pixel of windows */
+static const unsigned int borderpx         = 2;  /* border pixel of windows */
 static const unsigned int gappih           = 3; /* horiz inner gap between windows */
 static const unsigned int gappiv           = 3; /* vert inner gap between windows */
 static const unsigned int gappoh           = 5; /* horiz outer gap between windows and screen edge */
@@ -16,16 +16,13 @@ static const int showbar                   = 1; /* 0 means no bar */
 static const int topbar                    = 1; /* 0 means bottom bar */
 static const char *fonts[]                 = {"JetBrainsMono NF:size=10"};
 static const float rootcolor[]             = COLOR(0x222222ff);
-static const float bordercolor[]           = COLOR(0x595959aa);
-static const float focuscolor[]            = COLOR(0xaaaaadad);
-static const float urgentcolor[]           = COLOR(0xff0000ff);
 
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
 static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 1.0f}; /* You can also use glsl colors */
 static uint32_t colors[][3]                = {
 	/*               fg          bg          border    */
-	[SchemeNorm] = { 0xbbbbbbff, 0x222222ff, 0x444444ff },
-	[SchemeSel]  = { 0xeeeeeeff, 0x005577ff, 0x005577ff },
+	[SchemeNorm] = { 0xbbbbbbff, 0x222222ff, 0x595959aa },
+	[SchemeSel]  = { 0xeeeeeeff, 0x005577ff, 0xaaaaadad },
 	[SchemeUrg]  = { 0,          0,          0x770000ff },
 };
 
@@ -219,7 +216,7 @@ static const Key keys[] = {
 
 static const Button buttons[] = {
 	{ ClkLtSymbol, 0,      BTN_LEFT,   setlayout,      {.v = &layouts[0]} },
-	{ ClkLtSymbol, 0,      BTN_RIGHT,  setlayout,      {.v = &layouts[2]} },
+	{ ClkLtSymbol, 0,      BTN_RIGHT,  setlayout,      {.v = &layouts[3]} },
 	{ ClkTitle,    0,      BTN_MIDDLE, zoom,           {0} },
 	{ ClkStatus,   0,      BTN_MIDDLE, spawn,          {.v = termcmd} },
 	{ ClkClient,   MODKEY, BTN_LEFT,   moveresize,     {.ui = CurMove} },
