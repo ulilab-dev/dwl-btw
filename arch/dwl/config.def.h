@@ -153,7 +153,6 @@ static const Key keys[] = {
     { MODKEY,                    XKB_KEY_e,           spawn,            {.v = file} },
     { MODKEY,                    XKB_KEY_w,           spawn,            {.v = waypaper} },
     { MODKEY,                    XKB_KEY_v,           spawn,       SHCMD("~/.config/rofi/clipboard.sh") },
-    { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_t,           spawn,       SHCMD("~/.config/waybar/switch.sh") },
     { MODKEY,                    XKB_KEY_period,      spawn,            {.v = emoji} },
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_p,           spawn,       SHCMD("hyprshot -m region -o ~/Pictures/Screenshots") },
 
